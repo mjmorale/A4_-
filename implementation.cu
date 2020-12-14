@@ -68,7 +68,7 @@ void gpu_calculation(double* input, double* output, int length)
     printf("yes %d", &f);
     // (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1)
     if( f ) {
-        printf("6");
+        printf("la vache");
         output[index] = 2;/*(input[(x-1)*(length)+(y-1)] +
                         input[(x-1)*(length)+(y)]   +
                         input[(x-1)*(length)+(y+1)] +
