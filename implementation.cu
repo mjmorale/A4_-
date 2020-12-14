@@ -80,7 +80,7 @@ void gpu_calculation(double* input, double* output, int length)
                         input[(x+1)*(length)+(y+1)]) / 9;*/
             
     }
-    printf("5\n");
+    printf("5");
     if(x == length / 2 - 1 && y == length / 2 - 1) {
         return;
     }
@@ -128,7 +128,7 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     /* GPU calculation goes here */
     for(int i = 0; i < iterations; i++)
     {
-        gpu_calculation<<<9,9>>>(gpu_input, gpu_output, length);
+        gpu_calculation<<<1024,1024>>>(gpu_input, gpu_output, length);
         cudaDeviceSynchronize();
         double* temp = gpu_output;
         gpu_output = gpu_input;
