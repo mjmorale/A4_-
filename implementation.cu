@@ -50,6 +50,7 @@ void array_process(double *input, double *output, int length, int iterations)
 __global__
 void gpu_calculation(double* input, double* output, int length)
 {
+    printf("123");
 
 }
 
