@@ -48,7 +48,7 @@ void array_process(double *input, double *output, int length, int iterations)
 
 
 __global__
-void gpu_calculation(double* input, double* output, int length)
+void gpu_calculation(double* input, double* output, int length, size_t size)
 {   
     printf("1");
     unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
@@ -60,7 +60,7 @@ void gpu_calculation(double* input, double* output, int length)
 
 
     
-    if(x > 1 && x < length - 1 && y > 1 && y < length - 1) {
+    if(x > 1 && x < size - 1 && y > 1 && y < size - 1) {
         output[index] = 2;/*(input[(x-1)*(length)+(y-1)] +
                         input[(x-1)*(length)+(y)]   +
                         input[(x-1)*(length)+(y+1)] +
@@ -70,7 +70,7 @@ void gpu_calculation(double* input, double* output, int length)
                         input[(x+1)*(length)+(y-1)] +
                         input[(x+1)*(length)+(y)]   +
                         input[(x+1)*(length)+(y+1)]) / 9;*/
-        printf("6")
+        printf("6");
             
     }
     printf("5\n");
@@ -121,7 +121,7 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     /* GPU calculation goes here */
     for(int i = 0; i < iterations; i++)
     {
-        gpu_calculation<<<1,2>>>(gpu_input, gpu_output, length);
+        gpu_calculation<<<1,2>>>(gpu_input, gpu_output, length, size);
         cudaDeviceSynchronize();
         double* temp = gpu_output;
         gpu_output = gpu_input;
