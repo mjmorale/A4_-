@@ -97,10 +97,10 @@ void GPU_array_process(double *input, double *output, int length, int iterations
 
     /* Preprocessing goes here */
     double* gpu_input;
-    size_t ouble* gpu_output;
-    int size = length*length*sizeof(double);
+    double* gpu_output;
+    size_t size = length*length*sizeof(double);
     dim3 nbrThreads(8,8);
-    dim3 nbrBlocks(size/(64*32)+1, 32);
+    dim3 nbrBlocks(length/8+1, length/8+1);
     cudaEventRecord(cpy_H2D_start);
     /* Copying array from host to device goes here */
     cudaMalloc((void**)&gpu_input, size);
