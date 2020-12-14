@@ -55,7 +55,6 @@ void gpu_calculation(double* input, double* output, int length)
     unsigned int index = y * length + x;
     
     //printf("yes %d", &f);
-    // (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1)
     if(x == length / 2 - 1 && y == length / 2 - 1) {
         return;
     }
@@ -105,8 +104,8 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     double* gpu_input;
     double* gpu_output;
     int size = length*length*sizeof(double);
-    int nbrThreads = 64;
-    int nbrBlocks = ceil(size/nbrThreads);
+    dim3 nbrThreads(8,8);
+    dim3 nbrBlocks(length/(64*32)+1, 32);
     cudaEventRecord(cpy_H2D_start);
     /* Copying array from host to device goes here */
     cudaMalloc((void**)&gpu_input, size);
