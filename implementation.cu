@@ -125,7 +125,7 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     /* GPU calculation goes here */
     for(int i = 0; i < iterations; i++)
     {
-        gpu_calculation<<<1,2>>>(gpu_input, gpu_output, length);
+        gpu_calculation<<<1,1>>>(gpu_input, gpu_output, length);
         cudaDeviceSynchronize();
         double* temp = gpu_output;
         gpu_output = gpu_input;
