@@ -54,7 +54,6 @@ void gpu_calculation(double* input, double* output, int length)
     unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
     unsigned int index = y * length + x;
     
-    //printf("yes %d", &f);
     if(x == length / 2 - 1 && y == length / 2 - 1) {
         return;
     }
@@ -67,13 +66,9 @@ void gpu_calculation(double* input, double* output, int length)
     if(x == length / 2 && y == length / 2) {
         return;
     }
-    printf("%d %d v \n", blockIdx.y, threadIdx.y);
-    if( (x > 0) &&
-    (x < length - 1) &&
-    (y > 0) &&
-    (y < length - 1) 
-    ) {
-        printf("la vache");
+    
+    if( (x > 0) && (x < length - 1) && (y > 0) && (y < length - 1) ) 
+    {
         output[index] = (input[(x-1)*(length)+(y-1)] +
                         input[(x-1)*(length)+(y)]   +
                         input[(x-1)*(length)+(y+1)] +
