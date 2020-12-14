@@ -106,6 +106,8 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     double* gpu_input;
     double* gpu_output;
     int size = length*length*sizeof(double);
+    int nbrThreads = 64;
+    int nbrBlocks = ceil(length/nbrThreads);
     cudaEventRecord(cpy_H2D_start);
     /* Copying array from host to device goes here */
     cudaMalloc((void**)&gpu_input, size);
@@ -123,14 +125,14 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     /* GPU calculation goes here */
     for(int i = 0; i < iterations-1; i++)
     {
-        gpu_calculation<<<10,10>>>(gpu_input, gpu_output, length);
+        gpu_calculation<<<nbrBlocks,nbrThreads>>>(gpu_input, gpu_output, length);
         cudaDeviceSynchronize();
         double* temp = gpu_output;
         gpu_output = gpu_input;
         gpu_input = temp;
 
     }
-    gpu_calculation<<<10,10>>>(gpu_input, gpu_output, length);
+    gpu_calculation<<<nbrBlocks,nbrThreads>>>(gpu_input, gpu_output, length);
 
     cudaEventRecord(comp_end);
     cudaEventSynchronize(comp_end);
