@@ -107,7 +107,7 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     double* gpu_output;
     int size = length*length*sizeof(double);
     int nbrThreads = 64;
-    int nbrBlocks = ceil(length/nbrThreads);
+    int nbrBlocks = ceil(size/nbrThreads);
     cudaEventRecord(cpy_H2D_start);
     /* Copying array from host to device goes here */
     cudaMalloc((void**)&gpu_input, size);
