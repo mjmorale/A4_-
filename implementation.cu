@@ -62,20 +62,6 @@ void gpu_calculation(double* input, double* output, int length)
     
     //printf("yes %d", &f);
     // (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1)
-    if( f ) {
-        printf("la vache");
-        output[index] = (input[(x-1)*(length)+(y-1)] +
-                        input[(x-1)*(length)+(y)]   +
-                        input[(x-1)*(length)+(y+1)] +
-                        input[(x)*(length)+(y-1)]   +
-                        input[(x)*(length)+(y)]     +
-                        input[(x)*(length)+(y+1)]   +
-                        input[(x+1)*(length)+(y-1)] +
-                        input[(x+1)*(length)+(y)]   +
-                        input[(x+1)*(length)+(y+1)]) / 9;
-            
-    }
-    printf("5");
     if(x == length / 2 - 1 && y == length / 2 - 1) {
         return;
     }
@@ -88,6 +74,20 @@ void gpu_calculation(double* input, double* output, int length)
     if(x == length / 2 && y == length / 2) {
         return;
     }
+    if( (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1) ) {
+        printf("la vache");
+        output[index] = (input[(x-1)*(length)+(y-1)] +
+                        input[(x-1)*(length)+(y)]   +
+                        input[(x-1)*(length)+(y+1)] +
+                        input[(x)*(length)+(y-1)]   +
+                        input[(x)*(length)+(y)]     +
+                        input[(x)*(length)+(y+1)]   +
+                        input[(x+1)*(length)+(y-1)] +
+                        input[(x+1)*(length)+(y)]   +
+                        input[(x+1)*(length)+(y+1)]) / 9;
+            
+    }
+    
 }
 
 // GPU Optimized function
