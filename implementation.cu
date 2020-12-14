@@ -50,20 +50,15 @@ void array_process(double *input, double *output, int length, int iterations)
 __global__
 void gpu_calculation(double* input, double* output, int length)
 {   
-    printf("1");
     unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
-    printf("2");
     unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
-    printf("3");
     unsigned int index = y * length + x;
-    printf("4");
 
     int b = x> 1;
     int c = x < length-1;
     int d = y < length-1;
     int e = y > 1;
     int f= b && c && d && e;
-    printf("b%d c%d d%d e%d f", &b, &c, &d, &e);
     
     printf("yes %d", &f);
     // (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1)
