@@ -70,6 +70,7 @@ void gpu_calculation(double* input, double* output, int length)
                         input[(x+1)*(length)+(y-1)] +
                         input[(x+1)*(length)+(y)]   +
                         input[(x+1)*(length)+(y+1)]) / 9;*/
+        printf("6")
             
     }
     printf("5\n");
