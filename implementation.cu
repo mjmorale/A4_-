@@ -63,7 +63,8 @@ void gpu_calculation(double* input, double* output, int length)
     int d = y < length-1;
     int e = y > 1;
 
-    printf("b%dc%dd%de%df", &b, &c, &d, &e);
+    printf("b%d c%d d%d e%d f", &b, &c, &d, &e);
+
     if( (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1) ) {
         printf("6");
         output[index] = 2;/*(input[(x-1)*(length)+(y-1)] +
