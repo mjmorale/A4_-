@@ -54,13 +54,13 @@ void gpu_calculation(double* input, double* output, int length)
     unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
     unsigned int index = y * length + x;
 
-    int b = x> 1;
+    int b = 1;
     int c = x < length-1;
     int d = y < length-1;
-    int e = y > 1;
+    int e = 1;
     int f= b && c && d && e;
     
-    printf("yes %d", &f);
+    //printf("yes %d", &f);
     // (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1)
     if( f ) {
         printf("la vache");
@@ -123,7 +123,7 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     /* GPU calculation goes here */
     for(int i = 0; i < iterations; i++)
     {
-        gpu_calculation<<<1024,1024>>>(gpu_input, gpu_output, length);
+        gpu_calculation<<<10,10>>>(gpu_input, gpu_output, length);
         cudaDeviceSynchronize();
         double* temp = gpu_output;
         gpu_output = gpu_input;
