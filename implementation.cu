@@ -53,7 +53,7 @@ void gpu_calculation(double* input, double* output, int length)
     unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
     unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
     unsigned int index = y * length + x;
-
+    
     //printf("yes %d", &f);
     // (x > 1) && (x < length - 1) && (y > 1) && (y < length - 1)
     if(x == length / 2 - 1 && y == length / 2 - 1) {
@@ -68,7 +68,7 @@ void gpu_calculation(double* input, double* output, int length)
     if(x == length / 2 && y == length / 2) {
         return;
     }
-    printf("%d %d v \n", x, y);
+    printf("%d %d v \n", blockDim.y, threadIdx.y);
     if( (x > 0) &&
     //(x < length - 1) &&
     (y > 0) //&&
