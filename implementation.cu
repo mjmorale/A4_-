@@ -121,7 +121,7 @@ void GPU_array_process(double *input, double *output, int length, int iterations
     //Copy array from host to device
     cudaEventRecord(comp_start);
     /* GPU calculation goes here */
-    for(int i = 0; i < iterations; i++)
+    for(int i = 0; i < iterations-1; i++)
     {
         gpu_calculation<<<10,10>>>(gpu_input, gpu_output, length);
         cudaDeviceSynchronize();
@@ -130,6 +130,8 @@ void GPU_array_process(double *input, double *output, int length, int iterations
         gpu_input = temp;
 
     }
+    gpu_calculation<<<10,10>>>(gpu_input, gpu_output, length);
+
     cudaEventRecord(comp_end);
     cudaEventSynchronize(comp_end);
 
