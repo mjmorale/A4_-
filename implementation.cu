@@ -97,7 +97,7 @@ void GPU_array_process(double *input, double *output, int length, int iterations
 
     /* Preprocessing goes here */
     double* gpu_input;
-    double* gpu_output;
+    size_t ouble* gpu_output;
     int size = length*length*sizeof(double);
     dim3 nbrThreads(8,8);
     dim3 nbrBlocks(size/(64*32)+1, 32);
